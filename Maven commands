@@ -1,0 +1,24 @@
+Skip test: -Dmaven.test.skip=true
+Define file encoding: -Dfile.encoding=CP1252
+Build appBundle for OSGI: -P build-appBundle
+
+使用 mvn assembly:assembly 将依赖也打进jar包
+<project>
+  [...]
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  [...]
+</project>
+
+Deploy file to maven
+mvn deploy:deploy-file -Dfile=btutil.jar -DgroupId=com.basistech -DartifactId=com.basistech.util -Dversion=7.11.2 -Dpackaging=jar -DrepositoryId=archiva.internal -Durl=http://54.229.74.47:8080/archiva/repository/internal
