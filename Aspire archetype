@@ -1,0 +1,6 @@
+Using the Archetype to Create a New Pipeline Stage (in eclipse workspace)
+C:\workspace>mvn archetype:generate -DarchetypeGroupId=com.searchtechnologies.aspire -DarchetypeArtifactId=aspire-stage-archetype -DarchetypeVersion=2.0-SNAPSHOT -DrepositoryId=stPublic
+
+
+To create a new App Bundle, use Aspire Maven Distribution Archetype and delete the no necessary files/dirs. 
+Only files under root folder and folder distribution-files are required.
