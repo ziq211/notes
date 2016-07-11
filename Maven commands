@@ -22,3 +22,5 @@ Build appBundle for OSGI: -P build-appBundle
 
 Deploy file to maven
 mvn deploy:deploy-file -Dfile=btutil.jar -DgroupId=com.basistech -DartifactId=com.basistech.util -Dversion=7.11.2 -Dpackaging=jar -DrepositoryId=archiva.internal -Durl=http://54.229.74.47:8080/archiva/repository/internal
+Install file to local maven:
+mvn deploy:deploy-file -Dfile=btutil.jar -DgroupId=com.basistech -DartifactId=com.basistech.util -Dversion=7.11.2 -Dpackaging=jar
