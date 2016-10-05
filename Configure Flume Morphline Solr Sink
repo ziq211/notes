@@ -1,0 +1,5 @@
+In Sink configs:
+The .batchSize means when Flume events number reaches to the batchSize, start execute morphline commands to process the events.
+
+In Morphline File configs:
+We define the batchSize of the documents to be posted to Solr in SOLR_LOCATOR configs.
