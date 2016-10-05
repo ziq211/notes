@@ -1,1 +1,3 @@
 # notes
+
+Personal study notes.
