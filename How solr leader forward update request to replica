@@ -6,6 +6,8 @@ pollQueueTime is set to 0 by StreamingSolrServers.getSolrServer.
 https://github.com/cloudera/lucene-solr/blob/cdh5-4.10.3_5.9.0/solr/solrj/src/java/org/apache/solr/client/solrj/impl/ConcurrentUpdateSolrServer.java
 https://github.com/cloudera/lucene-solr/blob/25d722e35238cca776abbe3a621e0c5b733e762d/solr/core/src/java/org/apache/solr/update/StreamingSolrServers.java
 
+The ConcurrentUpdateSolrServer use DefaultHttpClient with ThreadSafeClientConnManager or PoolingClientConnectionManager to forward
+the request. So the tcp connection number is not a problem.
 
 
 Reference:
