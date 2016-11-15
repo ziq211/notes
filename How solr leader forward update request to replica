@@ -1,0 +1,13 @@
+Solr from Cloudera Search:
+ConcurrentUpdateSolrServer sendUpdateStream(), poll update request from BlockingQueue<UpdateRequest> queue. When queue is empty, http post polled
+updated request to replica node.
+Polling update request by: req = queue.poll(pollQueueTime, TimeUnit.MILLISECONDS);
+pollQueueTime is set to 0 by StreamingSolrServers.getSolrServer.
+https://github.com/cloudera/lucene-solr/blob/cdh5-4.10.3_5.9.0/solr/solrj/src/java/org/apache/solr/client/solrj/impl/ConcurrentUpdateSolrServer.java
+https://github.com/cloudera/lucene-solr/blob/25d722e35238cca776abbe3a621e0c5b733e762d/solr/core/src/java/org/apache/solr/update/StreamingSolrServers.java
+
+
+
+Reference:
+https://lucidworks.com/blog/2015/06/10/indexing-performance-solr-5-2-now-twice-fast/
+https://issues.apache.org/jira/browse/SOLR-7333
