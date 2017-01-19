@@ -1,4 +1,4 @@
-To include local libs as dependency:
+## To include local libs as dependency:
 <dependency>
   <groupId>com.caucho</groupId>
   <artifactId>resin-util</artifactId>
