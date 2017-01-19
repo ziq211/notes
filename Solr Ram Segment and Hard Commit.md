@@ -6,4 +6,5 @@
 1. new added documents are hosted in Ram buffer first. (defined in solrconfig, ramBufferSizeMB. No Disk IO involved)
 I assume this buffer actually host an open segment in ram, am I right?
 2. What will happen when the ram buffer is full and the time of autocommit is not reached yet? Will Solr flush the segment in ram to disk anyway?
-3. The <maxIndexingThreads> controls how many threads will be used to add, delete docs to and from Ram segment. The thread for flusing Ram segment to disk is also from here.
+3. The <maxIndexingThreads> controls how many threads will be used to add, delete docs to and from Ram segment. 
+The thread for flusing Ram segment to disk is also from here (After a thread added a doc, Solr will verify if flush should be triggered. If it is, this therad will be used to do flush.)
