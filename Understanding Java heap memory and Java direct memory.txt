@@ -1,0 +1,37 @@
+Understanding Java heap memory and Java direct memory
+
+There are a lot of articles on the web discussed how to tune heap memory and direct memory, some are application related while some are not. 
+Here I'm not going to go over it again, just want explain the difference between them and things you need to consider when tunning them.
+
+Java Heap memory
+Java application runs in a Java runtime environment, call JVM. The Java heap is the memory area that JVM allocated from native memory for java applications. For JVM was designed to insulate applications from the host, thus when we talk about java memory, naturally we refer java heap.
+Not many, but some of them you can play with when you want tune your JVM heap, for example, -Xmx(max) and -Xms(min) heap size allocation.
+More detail you can find in
+https://docs.oracle.com/cd/E13222_01/wls/docs81/perform/JVMTuning.html#1104218
+
+Java direct memory
+Direct memory was introduced since java 1.4. The new I/O (NIO) classes introduced a new way of performing I/O based on channels and buffers. NIO added support for direct ByteBuffers, which can be passed directly to native memory rather than Java heap. Making them significantly faster in some scenarios because they can avoid copying data between Java heap and native heap.
+
+Not limited to that, it also support I/O buffers backed by Java heap. A non-direct ByteBuffer holds its data in a byte[] array on the Java heap.
+The Bytebuffer class is defined in java.nio like below:
+    java.lang.Object
+        java.nio.Buffer
+            java.nio.ByteBuffer
+A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it. That is, it will attempt to avoid copying the buffer's content to (or from) an intermediate buffer before (or after) each invocation of one of the underlying operating system's native I/O operations. 
+
+However, the application still uses an object on the Java heap to orchestrate I/O operations, but the buffer that holds the data is held in native memory, the Java heap object only contains a reference to the native heap buffer. 
+
+Check nio detail in 
+http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html
+
+   
+Garbage collection and things to consider when tunning JVM heap and direct memory
+Garbage collection is the JVM's process of freeing up unused Java objects in the Java heap.The Java heap is where the objects of a Java program live. It is a repository for live objects, dead objects, and free memory. When an object can no longer be reached from any pointer in the running program, it is considered "garbage" and ready for collection.
+
+
+It doesn't mean directory memory JVM doesn't manage direct memory, the objects in direct memory has references in heap, when the reference get garbage collected, the object in direct memory will get freed up. 
+
+So, obviously there is a trick to play when adjusting heap and direct memory for Java. When heap increases, the chance of direct memory get OOM error raises, so consider to decrease heap when you have limited native memory and also you want to avoid direct memory OOM error.
+
+Reference:
+http://www.ibm.com/developerworks/library/j-nativememory-linux/
